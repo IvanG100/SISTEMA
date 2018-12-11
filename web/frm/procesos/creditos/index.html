@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Nombre del Sistema| Creditos</title>
+        <link rel="icon" type="image/png" href="../../../favicon.png"/>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../../../css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../../css/estilos.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div id="confirmar"></div>
+        <div id="buscar"></div>
+        <div id="panelPrograma" class="panel panel-primary">
+            <div class="panel-heading centrado">Creditos  | <span
+                    id="susuario_usuario"></span></div>
+                    <div class="panel-body">
+                        <form id="formPrograma">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <span>Id</span>
+                                </div>
+                                <div class="col-md-1">
+                                    <input id="id_aprobacioncredito" name="id_aprobacioncredito" type="text"
+                                           class="form-control imput-sm" placeholder="Id">
+                                </div>
+                                <div class="col-md-1">
+                                    <button id="botonBuscarIdAprobacionCredito" type="button" class="btn btn-primary btn-sm"><span
+                                            class="glyphicon glyphicon-search"></span></button>
+                                </div>
+                                <div class="col-md-9">   
+                            </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-1">
+                                <span>Fecha</span>
+                            </div>
+                            <div class="col-md-2">
+                                <input id="fecha_aprobacioncredito" name="fecha_aprobacioncredito" type="date" class="form-control input-sm">
+                            </div>
+                                <div class="col-md-9">
+                                    
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                            <div class="col-md-1">
+                                <span> Descripcion</span>
+                            </div>
+                            <div class="col-md-4">
+                                <textarea id="descripcion_aprobacioncredito" name="descripcion_aprobacioncredito"  class="form-control 
+                                          textarea" placeholder="Descripcion" ></textarea>                       
+                            </div>
+                                <div class="col-md-7">
+                                    
+                                </div>
+                        </div>
+                            <br>
+                            <div class="row">
+                            <div class="col-md-1">
+                                <span> Referencia Comercial</span>
+                            </div>
+                            <div class="col-md-4">
+                                <textarea id="referencia_comercial" name="referencia_comercial"  class="form-control 
+                                          textarea" placeholder="Referencia Comercial" ></textarea>                       
+                            </div>
+                                <div class="col-md-7">
+                                    
+                                </div>
+                        </div>
+                            <br>
+                            <div class="row">
+                            <div class="col-md-1">
+                                <span> Referencia Personal</span>
+                            </div>
+                            <div class="col-md-4">
+                                <textarea id="referencia_personal" name="referencia_personal"  class="form-control 
+                                          textarea" placeholder="Referencia Personal" ></textarea>                       
+                            </div>
+                                <div class="col-md-7">
+                                    
+                                </div>
+                        </div>
+                            <br>
+                            
+                            <div class="row">
+                        <div class="col-md-1">
+                            <span>Estado</span>
+                        </div>
+                        <div class="col-md-4">
+                            <select name="estado_aprobacioncredito" id="estado_aprobacioncredito" class="form-control input-sm" >
+                                <option selected value="">Seleccionar</option>
+                                <option value="APROBADO">APROBADO</option> 
+                                <option value="PENDIENTE">PENDIENTE</option> 
+                                <option value="RECHAZADO">RECHAZADO</option> 
+
+                            </select>
+                        </div>
+                        <div class="col-md-7">   
+                        </div>
+                    </div>
+                            <br>
+                            
+                            <!--<div class="row">
+                                <div class="col-md-1">
+                                <span>Estado</span>
+                            </div>
+                            <div class="col-md-4">
+                                <input id="estado_aprobacioncredito" name="estado_aprobacioncredito" type="text" class="form-control input-sm" placeholder="Estado">
+                            </div>
+                                <div class="col-md-7">
+                                    
+                                </div>
+                            </div>
+                            <br>-->
+                            <div class="row">
+                                <div class="col-md-1">
+                                <span>Limite Credito</span>
+                            </div>
+                            <div class="col-md-4">
+                                <input id="limite_credito" name="limite_credito" type="text" class="form-control input-sm" placeholder="Limite Credito">
+                            </div>
+                                <div class="col-md-7">
+                                    
+                                </div>
+                            </div>
+                            
+                        </form>
+                    </div>
+            <div class="panel-footer centrado">
+                <button id="botonAgregar" type="button" class="btn btn-primary btn-sm">Agregar</button>
+                <button id="botonModificar" type="button" class="btn btn-primary btn-sm">Modificar</button>
+                <button id="BotonEliminar" type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                        data-target="#confirmarEliminar">Eliminar</button>
+                <button id="botonSalir" type="button" class="btn btn-primary btn-sm">Salir</button>
+            </div>
+        </div>
+        <div id="mensajes" class="well well-sm centrado">Mensaje del Sistema.</div>
+        <div class="modal fade" id="confirmarEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header centrado">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+                                &times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Mensaje del Sistema</h4>
+                    </div>
+                    <div class="modal-footer centrado">
+                        <button id="botonEliminarAlert" type="button" class="btn btn-primary btn-sm">Eliminar</button>
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="../../../js/jquery.min.js" type="text/javascript"></script>
+        <script src="../../../js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../../js/funciones.js" type="text/javascript"></script>
+        <script src="js/funciones.js" type="text/javascript"></script>
+    <script>
+        //verificarSesion(true);
+        $("#buscar").css("display", "none");
+        //$("#id_aprobacioncredito").focus();
+        //siguientecampo("#id_aprobacioncredito", "#nombre_aprobacioncredito", false);
+        $("#id_aprobacioncredito").focusout(function (event) {
+            if ($("#id_aprobacioncredito").val() === "") {
+                $("#id_aprobacioncredito").val("0");
+            }
+            buscarIdAprobacionCredito();
+        });
+        $("#botonBuscarIdAprobacionCredito").on('click', function () {
+           $("#buscar").load("buscar.html");
+           $("#buscar").fadeIn("slow");
+           $("#panelPrograma").fadeOut("slow");
+        });
+        
+        /*$("#nombre_aprobacioncredito").focusout(function (event) {
+            if ($("#nombre_aprobacioncredito").val() !== "") {
+                buscarAprobacionCredito();
+            }
+            
+        });*/
+        
+        $("#botonAgregar").on('click', function () {
+          if (validarFormulario()) {
+              agregarAprobacionCredito();
+          }  
+        });
+        $("#botonModificar").on('click', function () {
+         if(validarFormulario()) {
+             modificarAprobacionCredito();
+         }   
+        });
+        $("#botonEliminarAlert").on('click', function () {
+           eliminarAprobacionCredito();
+           $('#confirmarEliminar').modal('hide');
+        });
+        $("#botonSalir").on('click', function () {
+            location.href = "../../../menu.html";
+        });
+        
+    </script>
+    </body>
+</html>

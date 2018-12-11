@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="recibo" language="groovy" pageWidth="564" pageHeight="451" orientation="Landscape" columnWidth="524" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f6db9cb7-14d4-4c97-a10e-89aa8b932cfe">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="DESDE" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="HASTA" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from factura_ventas fv left join clientes c
+on fv.id_cliente=c.id_cliente
+left join factura_detalle_ventas fdv
+on  fv.id_factura_venta=fdv.id_factura_venta
+left join articulos a on
+a.id_articulo=fdv.id_articulo
+left join timbrados t on
+t.id_timbrado=fv.id_timbrado
+left join puestos p on
+p.id_puesto=t.id_puesto
+left join establecimientos e on
+e.id_establecimiento=t.id_establecimiento
+left join cuentas ct on
+ct.id_factura_venta=fv.id_factura_venta
+left join detallescuentas dc on
+ct.id_cuenta=dc.id_cuenta
+left join recibos r on
+r.id_cuenta=ct.id_cuenta
+where dc.id_cuenta= $P{DESDE} and dc.nro_cuota= $P{HASTA}  group by fv.id_factura_venta, c.id_cliente, fdv.id_factura_detalle_venta, a.id_articulo, t.id_timbrado, p.id_puesto, e.id_establecimiento, ct.id_cuenta,dc.id_detallecuenta, r.id_recibo]]>
+	</queryString>
+	<field name="id_factura_venta" class="java.lang.Integer"/>
+	<field name="id_cliente" class="java.lang.Integer"/>
+	<field name="fecha_factura_venta" class="java.sql.Date"/>
+	<field name="id_tipo_factura" class="java.lang.Integer"/>
+	<field name="cantidad_cuotas" class="java.lang.Integer"/>
+	<field name="numero_factura_venta" class="java.lang.Integer"/>
+	<field name="estado_venta" class="java.lang.String"/>
+	<field name="id_timbrado" class="java.lang.Integer"/>
+	<field name="id_usuario" class="java.lang.Integer"/>
+	<field name="nombre_cliente" class="java.lang.String"/>
+	<field name="apellido_cliente" class="java.lang.String"/>
+	<field name="ruc_cliente" class="java.lang.String"/>
+	<field name="ci_cliente" class="java.lang.String"/>
+	<field name="direccion_cliente" class="java.lang.String"/>
+	<field name="telefono_cliente" class="java.lang.String"/>
+	<field name="correo_cliente" class="java.lang.String"/>
+	<field name="id_factura_detalle_venta" class="java.lang.Integer"/>
+	<field name="id_articulo" class="java.lang.Integer"/>
+	<field name="cantidad_venta" class="java.lang.Integer"/>
+	<field name="nombre_articulo" class="java.lang.String"/>
+	<field name="id_marca" class="java.lang.Integer"/>
+	<field name="id_categoria" class="java.lang.Integer"/>
+	<field name="descripcion_articulo" class="java.lang.String"/>
+	<field name="precio_venta" class="java.lang.Integer"/>
+	<field name="precio_compra" class="java.lang.Integer"/>
+	<field name="codigo_articulo" class="java.lang.String"/>
+	<field name="iva_articulo" class="java.lang.Integer"/>
+	<field name="id_ubicacion" class="java.lang.Integer"/>
+	<field name="numero_timbrado" class="java.lang.String"/>
+	<field name="fecha_inicio_timbrado" class="java.sql.Date"/>
+	<field name="fecha_vencimiento_timbrado" class="java.sql.Date"/>
+	<field name="desde_timbrado" class="java.lang.Integer"/>
+	<field name="hasta_timbrado" class="java.lang.Integer"/>
+	<field name="estado_timbrado" class="java.lang.String"/>
+	<field name="id_puesto" class="java.lang.Integer"/>
+	<field name="id_establecimiento" class="java.lang.Integer"/>
+	<field name="nombre_puesto" class="java.lang.String"/>
+	<field name="nombre_establecimiento" class="java.lang.String"/>
+	<field name="actividad_economica" class="java.lang.String"/>
+	<field name="ruc_establecimiento" class="java.lang.String"/>
+	<field name="representante_establecimiento" class="java.lang.String"/>
+	<field name="telefono_establecimiento" class="java.lang.String"/>
+	<field name="direccion_establecimiento" class="java.lang.String"/>
+	<field name="id_ciudad" class="java.lang.Integer"/>
+	<field name="id_cuenta" class="java.lang.Integer"/>
+	<field name="monto_total" class="java.lang.Integer"/>
+	<field name="estado_cuenta" class="java.lang.String"/>
+	<field name="total_cuota" class="java.lang.Integer"/>
+	<field name="id_detallecuenta" class="java.lang.Integer"/>
+	<field name="nro_cuota" class="java.lang.Integer"/>
+	<field name="vencimiento_cuota" class="java.sql.Date"/>
+	<field name="monto_cuota" class="java.lang.Integer"/>
+	<field name="estado_cuota" class="java.lang.String"/>
+	<field name="id_recibo" class="java.lang.Integer"/>
+	<field name="montoenletras" class="java.lang.String"/>
+	<variable name="nro" class="java.lang.String" calculation="Sum"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="139" splitType="Stretch">
+			<rectangle>
+				<reportElement x="352" y="94" width="100" height="20" backcolor="#CCCCCC" uuid="afd84123-2b6c-4ad9-ad23-e17850a28f41"/>
+			</rectangle>
+			<textField>
+				<reportElement x="360" y="96" width="82" height="20" uuid="89597331-a987-4c96-824f-e7eddf203921"/>
+				<textFieldExpression><![CDATA[$F{monto_cuota}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="87" y="33" width="168" height="20" uuid="7fcc98ec-8cee-45d2-ab48-bfd49a92e54b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ELECTRODOMESTICOS EN GRAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="75" y="57" width="205" height="20" uuid="22f31e42-c798-4133-bf0a-e236f85bd1bf"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Dirección: 24 de junio c/ 2da. proyectada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="72" y="11" width="194" height="20" uuid="a8e22193-96c6-428a-9eef-a0b9affd36a5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Nuevo Centro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="75" y="97" width="127" height="20" uuid="b484669f-7aac-45eb-b0c1-329ab87c1c33"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[San Antonio - Paraguay]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="75" y="77" width="127" height="20" uuid="9c281443-bfd7-4fb4-ac27-579380e68752"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Telefóno:(0981) 725 999]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="345" y="14" width="120" height="20" uuid="09df9151-0a30-461d-b5de-8739b225e2d2"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECIBO DE DINERO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="352" y="66" width="19" height="20" uuid="20478447-b14f-4c31-a8d7-4c2eb4b44a3c"/>
+				<textElement>
+					<font size="10" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[N°.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="378" y="40" width="94" height="20" uuid="e0dd3dfc-905b-415d-97e0-77e337e55d7c"/>
+				<textFieldExpression><![CDATA[$F{ruc_establecimiento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="352" y="40" width="30" height="20" uuid="355a8142-d9f9-40ab-b06e-6e6017512dcd"/>
+				<text><![CDATA[RUC:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="97" width="29" height="20" uuid="f41871d7-a79d-4d12-81f8-5428778ab5ab"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gs.]]></text>
+			</staticText>
+			<textField pattern="000000">
+				<reportElement x="372" y="67" width="100" height="20" uuid="8545b288-7d8a-4edd-8385-5851a30e93c8"/>
+				<textFieldExpression><![CDATA[$F{id_recibo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="236" splitType="Stretch">
+			<textField pattern="d/M/yyyy">
+				<reportElement x="111" y="166" width="100" height="20" uuid="53703241-51e2-4786-9cb6-04df1ce63b16"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="80" y="185" width="104" height="20" uuid="ca48ba63-fa3f-4d92-a093-c0a9b91cb0bd"/>
+				<textElement textAlignment="Justified">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lugar - Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="382" y="186" width="44" height="20" uuid="ac7df481-05c8-4916-ad82-3fb7ddfc2881"/>
+				<textElement textAlignment="Justified">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FIrma]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="45" y="166" width="72" height="20" uuid="1632d4c7-0a86-4feb-b07c-8b9de20938cc"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[San Antonio,]]></text>
+			</staticText>
+			<line>
+				<reportElement x="362" y="182" width="75" height="1" uuid="f4580187-90e4-400e-b8ca-9f33864df5e3"/>
+			</line>
+			<line>
+				<reportElement x="45" y="180" width="153" height="1" uuid="38c908ad-8eb5-4954-b96d-6354f7ec718e"/>
+			</line>
+			<staticText>
+				<reportElement x="45" y="16" width="100" height="20" uuid="59a61817-0026-409c-9efd-91b52c939827"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recibi(mos) de :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="375" y="17" width="30" height="20" uuid="4fe72c31-914f-4446-8516-29f707820a3c"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ruc:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="150" y="16" width="59" height="20" uuid="ad08aa87-d183-4043-9e70-46a276e8b4dc"/>
+				<textFieldExpression><![CDATA[$F{nombre_cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="205" y="16" width="100" height="20" uuid="f2fa13c4-fb4e-4861-9b53-652dd3cdd54c"/>
+				<textFieldExpression><![CDATA[$F{apellido_cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="408" y="17" width="84" height="20" uuid="26ee99e5-d028-4821-81ae-d1f0bf9fd04e"/>
+				<textFieldExpression><![CDATA[$F{ruc_cliente}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="142" y="30" width="227" height="1" uuid="3454a702-becf-4bab-a426-961f131b797a"/>
+			</line>
+			<rectangle>
+				<reportElement x="188" y="49" width="270" height="20" backcolor="#CCCCCC" uuid="17a40e28-ba43-4ede-81d6-b2592f65983b"/>
+			</rectangle>
+			<textField>
+				<reportElement x="229" y="107" width="50" height="20" uuid="898f8437-4db4-476c-be73-02e6997fdf47"/>
+				<textFieldExpression><![CDATA[$F{nro_cuota}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="45" y="78" width="413" height="20" backcolor="#CCCCCC" uuid="00711eaf-fb64-4657-b565-2395b4779718"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="248" y="107" width="76" height="20" uuid="73a35da9-f29e-499a-8ca6-e4a151eaac76"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[de factura N°]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="43" y="107" width="100" height="20" uuid="c3ccb412-72b2-4b45-8aea-633ae99eb30a"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[en concepto de :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="141" y="107" width="91" height="20" uuid="b09a155d-0ea4-41c4-abbd-6c4b9f55fef8"/>
+				<text><![CDATA[Pago de cuota N°]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="43" y="52" width="145" height="20" uuid="83c1a830-ce40-42df-9670-59c729447b34"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[la cantidad de guaranies]]></text>
+			</staticText>
+			<line>
+				<reportElement x="47" y="144" width="412" height="1" uuid="4d4ec839-e021-42ee-9e48-69587becf761"/>
+			</line>
+			<textField pattern="000">
+				<reportElement x="358" y="107" width="18" height="20" uuid="8ac1a1e8-c3d0-4aed-8182-aaa25c0cf48f"/>
+				<textFieldExpression><![CDATA[$F{id_puesto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="339" y="104" width="19" height="20" uuid="553bfe67-1ffd-43d8-924a-be85cc5b3de5"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="376" y="104" width="19" height="20" uuid="96fadca3-b2d1-421a-9555-3eae48156673"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<textField pattern="000">
+				<reportElement x="319" y="107" width="20" height="20" uuid="228b2a3b-c41c-4cfe-94bb-f99c6beeed2c"/>
+				<textFieldExpression><![CDATA[$F{id_establecimiento}]]></textFieldExpression>
+			</textField>
+			<textField pattern="000">
+				<reportElement x="395" y="107" width="68" height="20" uuid="3451c4bc-a882-4b00-9737-fe232958cfe8"/>
+				<textFieldExpression><![CDATA[$F{numero_factura_venta}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="403" y="30" width="55" height="1" uuid="2cecbbf2-f9b6-4e57-ab3b-861f2a107dbd"/>
+			</line>
+			<line>
+				<reportElement x="140" y="120" width="319" height="1" uuid="064b2f04-ed95-44e4-9d0d-efa1c15fcb5c"/>
+			</line>
+			<textField>
+				<reportElement x="191" y="52" width="246" height="20" uuid="86541e10-5886-49c6-b659-0d7e0754b93f"/>
+				<textFieldExpression><![CDATA[$F{montoenletras}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
